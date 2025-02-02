@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Security Course</title>
+    <style>
+        /* Profile Dropdown */
+.profile-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.profile-icon {
+    width: 50px;
+    height: 50px;
+    background-color: #ff9a9e;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.profile-icon:hover {
+    transform: scale(1.1);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+    padding: 10px;
+    width: 150px;
+    text-align: left;
+    z-index: 10;
+}
+
+.dropdown-content a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    padding: 8px 0;
+}
+
+.dropdown-content a:hover {
+    background: #f0f0f0;
+}
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: url('https://source.unsplash.com/1600x900/?cyber-security,technology') no-repeat center center/cover;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        h1 {
+            color: #444;
+            margin-top: 50px;
+            font-size: 36px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            width: 80%;
+            margin-top: 80px;
+            animation: fadeIn 1s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .section:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        h3 {
+            color: #0077b6;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        a {
+            color: #0077b6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .cta {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .cta button {
+            padding: 12px 25px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background: #0077b6;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .cta button:hover {
+            background: #005f8b;
+        }
+    </style>
+</head>
+<body>
+    <!-- Profile Dropdown -->
+<div class="profile-container">
+    <div class="profile-icon" onclick="toggleDropdown()">
+        {{ user.username|first|upper }}
+    </div>
+    <div id="dropdownContent" class="dropdown-content">
+        <p>Username: {{ user.username }}</p>
+        <form id="logoutForm" action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" style="border: none; background: none; color: #333; cursor: pointer;">
+                Logout
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Toggle dropdown menu
+    function toggleDropdown() {
+        var dropdown = document.getElementById("dropdownContent");
+        dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", function(event) {
+        var dropdown = document.getElementById("dropdownContent");
+        var profileIcon = document.querySelector(".profile-icon");
+
+        if (!profileIcon.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.style.display = "none";
+        }
+    });
+</script>
+
+    <h1>Welcome to the Cyber Security Course</h1>
+    <div class="container">
+        <div class="section">
+            <h3>Fundamentals of Cyber Security</h3>
+            <p>Understand the basic principles of cyber security, including risk management, network security, and the importance of securing digital assets.</p>
+            <p><strong>Useful Links:</strong> 
+                <a href="https://www.cybrary.it/learn/cyber-security-fundamentals/" target="_blank">Cybrary - Cyber Security Fundamentals</a>, 
+                <a href="https://www.cisa.gov/cybersecurity" target="_blank">CISA - Cyber Security Overview</a>
+            </p>
+            <p><strong>YouTube Video:</strong> <a href="https://youtu.be/5MMoxyK1Y9o?si=KPg6iVVE7PDj33wG" target="_blank">Cyber Security Basics</a></p>
+        </div>
+
+        <div class="section">
+            <h3>Network Security and Firewalls</h3>
+            <p>Learn about network security measures such as firewalls, intrusion detection systems, and how to secure networks against unauthorized access.</p>
+            <p><strong>Useful Links:</strong> 
+                <a href="https://www.sans.org/cyber-security-skills" target="_blank">SANS - Network Security Basics</a>, 
+                <a href="https://www.cloudflare.com/learning/ddos/" target="_blank">Cloudflare - Network Security Overview</a>
+            </p>
+            <p><strong>YouTube Video:</strong> <a href="https://youtu.be/NQ1cvwEvh44?si=4j07wHHNBXSekiPt" target="_blank">Network Security 101</a></p>
+        </div>
+
+        <div class="section">
+            <h3>Ethical Hacking and Penetration Testing</h3>
+            <p>Learn ethical hacking techniques and penetration testing strategies to identify vulnerabilities in systems and networks before malicious hackers exploit them.</p>
+            <p><strong>Useful Links:</strong> 
+                <a href="https://www.eccouncil.org/" target="_blank">EC-Council - Ethical Hacking</a>, 
+                <a href="https://www.kali.org/" target="_blank">Kali Linux - Penetration Testing Distribution</a>
+            </p>
+            <p><strong>YouTube Video:</strong> <a href="https://youtu.be/J_cNgAHFV48?si=cXkIGd9GhTDUJq3V" target="_blank">Ethical Hacking for Beginners</a></p>
+        </div>
+
+        <div class="section">
+            <h3>Cryptography and Data Protection</h3>
+            <p>Learn about encryption techniques, cryptography algorithms, and how to secure sensitive data using encryption and other protection methods.</p>
+            <p><strong>Useful Links:</strong> 
+                <a href="https://www.cryptosense.com/" target="_blank">CryptoSense - Cryptography Tools</a>, 
+                <a href="https://www.encryptionconsulting.com/" target="_blank">Encryption Consulting</a>
+            </p>
+            <p><strong>YouTube Video:</strong> <a href="https://youtu.be/6_Cxj5WKpIw?si=173rjPQF9Hxqmvd5" target="_blank">Understanding Cryptography</a></p>
+        </div>
+
+        <div class="section">
+            <h3>Incident Response and Threat Intelligence</h3>
+            <p>Learn how to respond to cyber attacks, manage security incidents, and use threat intelligence to proactively defend against attacks.</p>
+            <p><strong>Useful Links:</strong> 
+                <a href="https://www.incidentresponse.com/" target="_blank">Incident Response Services</a>, 
+                <a href="https://www.virustotal.com/gui/home/upload" target="_blank">VirusTotal - Threat Intelligence</a>
+            </p>
+            <p><strong>YouTube Video:</strong> <a href="https://youtu.be/IRSQEO0koYY?si=NYv2KQAmUfHG9wm3" target="_blank">Incident Response in Cyber Security</a></p>
+        </div>
+
+        <div class="section">
+            <h3>Cyber Security Compliance and Regulations</h3>
+            <p>Understand the various compliance requirements and regulations in the field of cyber security, such as GDPR, HIPAA, and ISO standards.</p>
+            <p><strong>Useful Links:</strong> 
+                <a href="https://www.gdpr.eu/" target="_blank">GDPR - General Data Protection Regulation</a>, 
+                <a href="https://www.iso.org/isoiec-27001-information-security.html" target="_blank">ISO/IEC 27001 - Information Security Management</a>
+            </p>
+            <p><strong>YouTube Video:</strong> <a href="https://youtu.be/ev6tQbnI22Q?si=-_l67tuUpoXWLGCH" target="_blank">Cyber Security Compliance and Regulations</a></p>
+        </div>
+
+        <div class="cta">
+            <p>Well done! You've finished the course. Keep up the great work!</p>
+            <a href="/cyber-security"><button>Back</button></a>
+        </div>
+    </div>
+</body>
+</html>

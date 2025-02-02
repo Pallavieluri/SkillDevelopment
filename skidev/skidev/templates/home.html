@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Learniverse Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            margin: 0;
+            background: url('https://source.unsplash.com/1600x900/?education,learning') no-repeat center center/cover;
+            color: #333;
+        }
+        .title {
+            font-size: 36px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ff7eb3, #ff758c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 50px;
+        }
+        .container {
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+            display: inline-block;
+            animation: fadeIn 1s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        button {
+            padding: 12px 25px;
+            margin: 10px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            background: linear-gradient(135deg, #fbd786, #f7797d);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s ease-in-out;
+            box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+        }
+        button:hover {
+            background: linear-gradient(135deg, #f7797d, #fbd786);
+            transform: scale(1.1);
+        }
+        .explore-container {
+            margin: 50px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 600px;
+            text-align: center;
+        }
+        .explore-container h2, .explore-container h4 {
+            grid-column: span 2;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .course-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 25px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            background: linear-gradient(135deg, #f7797d, #fbd786);
+            text-decoration: none;
+            border-radius: 25px;
+            transition: 0.3s ease-in-out;
+            box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+        }
+        .course-item:hover {
+            background: linear-gradient(135deg, #fbd786, #f7797d);
+            transform: scale(1.05);
+        }
+        .course-item img {
+            margin-right: 10px;
+            width: 40px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">LEARNIVERSE</h1>
+    
+    <div class="container">
+        <h1>Welcome to the Learniverse Portal</h1>
+        <p>Enhance your skills with our curated courses.</p>
+        <a href="/register"><button>Register</button></a>
+        <a href="/login"><button>Login</button></a>
+    </div>
+
+    <div class="explore-container">
+        <h2>Explore our Courses</h2>
+        <h4>Begin your learning journey with Learniverse by registering today</h4>
+        <div class="course-item">
+            <img src="https://i0.wp.com/junilearning.com/wp-content/uploads/2020/06/python-programming-language.webp?fit=1920%2C1920&ssl=1" alt="Python Image" />
+            Python Programming
+        </div>
+        <div class="course-item">
+            <img src="https://png.pngtree.com/png-clipart/20230923/original/pngtree-web-development-blue-gradient-concept-icon-programming-logo-software-vector-png-image_12735498.png" alt="Web Development Image" />
+            Web Development
+        </div>
+        <div class="course-item">
+            <img src="https://static.vecteezy.com/system/resources/previews/008/147/389/non_2x/technology-science-logo-with-data-concept-vector.jpg" alt="Data Science Image" />
+            Data Science
+        </div>
+        <div class="course-item">
+            <img src="https://thumbs.dreamstime.com/b/cyber-security-logo-shield-check-mark-security-shield-concept-internet-security-stock-illustration-cyber-security-logo-168398506.jpg" alt="Cyber Security Image" />
+            Cyber Security
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Overview - Skill Development Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: url('https://source.unsplash.com/1600x900/?study,books') no-repeat center center/cover;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Profile Dropdown */
+        .profile-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .profile-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #ff9a9e;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .profile-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+            padding: 10px;
+            width: 150px;
+            text-align: left;
+            z-index: 10;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .dropdown-content a {
+            display: block;
+            text-decoration: none;
+            color: #333;
+            padding: 8px 0;
+        }
+
+        .dropdown-content a:hover {
+            background: #f0f0f0;
+        }
+
+        /* Courses Container */
+        .container {
+            margin-top: 80px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+            display: inline-block;
+            animation: fadeIn 1s ease-in;
+            width: 60%;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Course Cards */
+        .course {
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+        }
+
+        .course:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .course a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Profile Dropdown -->
+    <div class="profile-container">
+        <div class="profile-icon" onclick="toggleDropdown()">
+            {{ user.username|first|upper }}
+        </div>
+        <div id="dropdownContent" class="dropdown-content">
+            <p>Username: {{ user.username }}</p>
+            <form id="logoutForm" action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" style="border: none; background: none; color: #333; cursor: pointer;">
+                    Logout
+                </button>
+            </form>
+            
+        </div>
+    </div>
+
+    <h1 style="color: #444; margin-top: 50px;">Explore Our Courses</h1>
+
+    <!-- Course List -->
+    <div class="container">
+        <div class="course">
+            <a href="{% url 'python_course' %}">Python Programming</a>
+            <p>Learn Python from scratch and master data structures, web development, and automation.</p>
+        </div>
+        <div class="course">
+            <a href="{% url 'web_dev' %}">Web Development</a>
+            <p>Become a full-stack web developer with HTML, CSS, JavaScript, and Django.</p>
+        </div>
+        <div class="course">
+            <a href="{% url 'data_science' %}">Data Science</a>
+            <p>Analyze data, build machine learning models, and work on real-world datasets.</p>
+        </div>
+        <div class="course">
+            <a href="{% url 'cyber_security' %}">Cyber Security</a>
+            <p>Understand cyber threats, ethical hacking, and how to protect systems.</p>
+        </div>
+    </div>
+
+    <script>
+        // Toggle dropdown menu
+        function toggleDropdown() {
+            var dropdown = document.getElementById("dropdownContent");
+            dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener("click", function(event) {
+            var dropdown = document.getElementById("dropdownContent");
+            var profileIcon = document.querySelector(".profile-icon");
+
+            if (!profileIcon.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.style.display = "none";
+            }
+        });
+    </script>
+
+</body>
+</html>

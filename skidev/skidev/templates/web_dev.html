@@ -1,0 +1,203 @@
+<!-- web_development_course.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development Course</title>
+    <style>
+        /* Profile Dropdown */
+.profile-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.profile-icon {
+    width: 50px;
+    height: 50px;
+    background-color: #ff9a9e;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.profile-icon:hover {
+    transform: scale(1.1);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+    padding: 10px;
+    width: 150px;
+    text-align: left;
+    z-index: 10;
+}
+
+.dropdown-content a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    padding: 8px 0;
+}
+
+.dropdown-content a:hover {
+    background: #f0f0f0;
+}
+
+       body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 50px;
+    margin: 0;
+    background: url('https://source.unsplash.com/1600x900/?technology,programming') no-repeat center center/cover;
+    background-size: cover;
+    color: #333;
+    display: flex; /* Enable flexbox for the body */
+    justify-content: center; /* Horizontally center the container */
+    align-items: center; /* Vertically center the container */
+    height: 100vh; /* Make sure the body takes up the full viewport height */
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.9); /* Lighter background for better text contrast */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 900px; /* Add a max-width for better responsiveness */
+    animation: fadeIn 1s ease-in;
+    text-align: left;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+    color: #e76f3c;
+    font-size: 36px;
+    margin-top: 50px;
+    text-align: center;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+h2 {
+    color: #0077b6;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+p {
+    text-align: center;
+    color: #e76f3c;
+}
+
+ul {
+    padding-left: 0;
+    color: #333;
+    list-style-type: none; /* Remove list bullets */
+    text-align: center; /* Center the list items */
+}
+
+ul li {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+.cta {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.cta button {
+    padding: 12px 25px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background: #ff7f50; /* Orange color for buttons */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 10px;
+}
+
+.cta button:hover {
+    background: #e76f3c; /* Darker orange on hover */
+}
+
+    </style>
+</head>
+<body>
+    <!-- Profile Dropdown -->
+<div class="profile-container">
+    <div class="profile-icon" onclick="toggleDropdown()">
+        {{ user.username|first|upper }}
+    </div>
+    <div id="dropdownContent" class="dropdown-content">
+        <p>Username: {{ user.username }}</p>
+        <form id="logoutForm" action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" style="border: none; background: none; color: #333; cursor: pointer;">
+                Logout
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Toggle dropdown menu
+    function toggleDropdown() {
+        var dropdown = document.getElementById("dropdownContent");
+        dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", function(event) {
+        var dropdown = document.getElementById("dropdownContent");
+        var profileIcon = document.querySelector(".profile-icon");
+
+        if (!profileIcon.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.style.display = "none";
+        }
+    });
+</script>
+
+    <div class="container">
+        <h1>Welcome to the Web Development Course</h1>
+        <p>Learn how to build modern, responsive websites from scratch.</p>
+        
+        <h2>What You Will Learn:</h2>
+        <ul>
+            <li>HTML, CSS, and JavaScript Basics</li>
+            <li>Responsive Web Design</li>
+            <li>Frontend Frameworks (React, Vue)</li>
+            <li>Backend Development (Node.js, Express)</li>
+            <li>Databases and APIs</li>
+            <li>Web Security Best Practices</li>
+            <li>Deployment and Optimization</li>
+        </ul>
+        
+        <div class="cta">
+            <h3>Start your web development journey today!</h3>
+            <a href="/web"><button>Go to Course</button></a>
+            <a href="/course"><button>Back</button></a>
+        </div>
+    </div>
+</body>
+</html>
+

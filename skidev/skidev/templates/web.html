@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development Course</title>
+    <style>
+        /* Profile Dropdown */
+.profile-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.profile-icon {
+    width: 50px;
+    height: 50px;
+    background-color: #ff9a9e;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.profile-icon:hover {
+    transform: scale(1.1);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+    padding: 10px;
+    width: 150px;
+    text-align: left;
+    z-index: 10;
+}
+
+.dropdown-content a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    padding: 8px 0;
+}
+
+.dropdown-content a:hover {
+    background: #f0f0f0;
+}
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: url('https://source.unsplash.com/1600x900/?web,development') no-repeat center center/cover;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        h1 {
+            color: #444;
+            margin-top: 50px;
+            font-size: 36px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            width: 80%;
+            margin-top: 80px;
+            animation: fadeIn 1s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .section:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        h2 {
+            color: #0077b6;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        a {
+            color: #0077b6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .cta {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .cta button {
+            padding: 12px 25px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background: #0077b6;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .cta button:hover {
+            background: #005f8b;
+        }
+    </style>
+</head>
+<body>
+    <!-- Profile Dropdown -->
+<div class="profile-container">
+    <div class="profile-icon" onclick="toggleDropdown()">
+        {{ user.username|first|upper }}
+    </div>
+    <div id="dropdownContent" class="dropdown-content">
+        <p>Username: {{ user.username }}</p>
+        <form id="logoutForm" action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" style="border: none; background: none; color: #333; cursor: pointer;">
+                Logout
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Toggle dropdown menu
+    function toggleDropdown() {
+        var dropdown = document.getElementById("dropdownContent");
+        dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", function(event) {
+        var dropdown = document.getElementById("dropdownContent");
+        var profileIcon = document.querySelector(".profile-icon");
+
+        if (!profileIcon.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.style.display = "none";
+        }
+    });
+</script>
+
+    <h1>Welcome to the Web Development Course</h1>
+    <div class="container">
+        <div class="section">
+            <h2>HTML, CSS, and JavaScript Basics</h2>
+            <p>Learn the fundamentals of web development. HTML is the backbone of any webpage, while CSS is used to style it. JavaScript adds interactivity and dynamic functionality.</p>
+            <p><strong>Useful Links:</strong> 
+                <a href="https://www.w3schools.com/html/" target="_blank">HTML Tutorial</a>, 
+                <a href="https://www.w3schools.com/css/" target="_blank">CSS Tutorial</a>, 
+                <a href="https://www.w3schools.com/js/" target="_blank">JavaScript Tutorial</a>
+            </p>
+            <p><strong>YouTube Video:</strong> <a href="https://www.youtube.com/watch?v=hdI2bqOjy3c" target="_blank">HTML, CSS, and JavaScript Crash Course</a></p>
+        </div>
+
+        <div class="section">
+            <h2>Responsive Web Design</h2>
+            <p>Learn how to make your website mobile-friendly and adaptive to different screen sizes using CSS media queries and modern techniques.</p>
+            <p><strong>Useful Links:</strong>
+                <a href="https://www.freecodecamp.org/news/a-complete-guide-to-flexbox/" target="_blank">Flexbox Guide</a>, 
+                <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries" target="_blank">Media Queries Documentation</a>
+            </p>
+            <p><strong>YouTube Video:</strong> <a href="https://www.youtube.com/watch?v=srvUrASNj0s" target="_blank">Responsive Web Design - Full Course</a></p>
+        </div>
+
+        <div class="section">
+            <h2>Frontend Frameworks (React, Vue)</h2>
+            <p>Explore modern JavaScript frameworks that help you build interactive, dynamic user interfaces faster and more efficiently.</p>
+            <p><strong>Useful Links:</strong> 
+                <a href="https://reactjs.org/" target="_blank">React Official Website</a>, 
+                <a href="https://vuejs.org/" target="_blank">Vue.js Official Website</a>
+            </p>
+            <p><strong>YouTube Videos:</strong> 
+                <a href="https://www.youtube.com/watch?v=dGcsHMXbSOA" target="_blank">React Crash Course</a>, 
+                <a href="https://www.youtube.com/watch?v=4deVCNJq3qc" target="_blank">Vue.js Crash Course</a>
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>Backend Development (Node.js, Express)</h2>
+            <p>Learn how to build server-side applications with Node.js and Express. This will allow you to handle requests, manage databases, and deliver content to users.</p>
+            <p><strong>Useful Links:</strong>
+                <a href="https://nodejs.org/" target="_blank">Node.js Official Website</a>, 
+                <a href="https://expressjs.com/" target="_blank">Express.js Official Website</a>
+            </p>
+            <p><strong>YouTube Video:</strong> <a href="https://www.youtube.com/watch?v=Oe421EPjeBE" target="_blank">Node.js Tutorial for Beginners</a></p>
+        </div>
+
+        <div class="section">
+            <h2>Databases and APIs</h2>
+            <p>Learn how to connect your website to databases and consume external APIs for dynamic data integration.</p>
+            <p><strong>Useful Links:</strong>
+                <a href="https://www.mongodb.com/what-is-mongodb" target="_blank">MongoDB Overview</a>, 
+                <a href="https://www.postgresql.org/" target="_blank">PostgreSQL Official Website</a>
+            </p>
+            <p><strong>YouTube Video:</strong> <a href="https://www.youtube.com/watch?v=7CqJlxBYj-M" target="_blank">MongoDB Crash Course</a></p>
+        </div>
+
+        <div class="section">
+            <h2>Web Security Best Practices</h2>
+            <p>Learn about web security principles, including HTTPS, data encryption, authentication, and authorization.</p>
+            <p><strong>Useful Links:</strong>
+                <a href="https://owasp.org/www-project-top-ten/" target="_blank">OWASP Top Ten Security Risks</a>, 
+                <a href="https://developer.mozilla.org/en-US/docs/Web/Security" target="_blank">MDN Web Security Guide</a>
+            </p>
+            <p><strong>YouTube Video:</strong> <a href="https://youtu.be/7ijBiXddB7w?si=nEC4OoO_8mIYTcs_" target="_blank">Web Security Tutorial</a></p>
+        </div>
+
+        <div class="section">
+            <h2>Deployment and Optimization</h2>
+            <p>Learn how to deploy your websites on cloud platforms like AWS, Heroku, or Netlify, and optimize performance for faster loading times.</p>
+            <p><strong>Useful Links:</strong>
+                <a href="https://www.heroku.com/" target="_blank">Heroku Deployment Guide</a>, 
+                <a href="https://www.netlify.com/" target="_blank">Netlify Deployment Guide</a>
+            </p>
+            <p><strong>YouTube Video:</strong> <a href="https://youtu.be/4FQWhUgEcz4?si=7ZXb8gQMw1dETCs3" target="_blank">Web Deployment and Optimization</a></p>
+        </div>
+
+        <div class="cta">
+            <p>Well done! You've finished the course. Keep up the great work!</p>
+            <a href="/web-development"><button>Back</button></a>
+        </div>
+    </div>
+</body>
+</html>

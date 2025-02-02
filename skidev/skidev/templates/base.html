@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Learniverse Portal{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        /* Navbar Styling */
+        .navbar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px 0 0 10px;
+        }
+        .navbar a, .navbar button {
+            margin-left: 20px;
+            color: #333;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .navbar a:hover, .navbar button:hover {
+            color: #ff5e62;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar for Profile and Logout (Only visible when logged in) -->
+    {% if user.is_authenticated %}
+        <div class="navbar">
+            <a href="{% url 'profile' %}">Profile</a>
+            <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+    {% endif %}
+
+    <!-- Main Content -->
+    <div>
+        {% block content %}
+        <!-- Content specific to each page will be injected here -->
+        {% endblock %}
+    </div>
+
+</body>
+</html>

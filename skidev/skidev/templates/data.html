@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DATA SCIENCE</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: url('https://source.unsplash.com/1600x900/?data-science,technology') no-repeat center center/cover;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        h1 {
+            color: #444;
+            margin-top: 50px;
+            font-size: 36px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            width: 80%;
+            margin-top: 80px;
+            animation: fadeIn 1s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .section:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        h3 {
+            color: #0077b6;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        a {
+            color: #0077b6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .cta {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .cta button {
+            padding: 12px 25px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background: #0077b6;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .cta button:hover {
+            background: #005f8b;
+        }
+        /* Profile Dropdown */
+.profile-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.profile-icon {
+    width: 50px;
+    height: 50px;
+    background-color: #ff9a9e;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.profile-icon:hover {
+    transform: scale(1.1);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+    padding: 10px;
+    width: 150px;
+    text-align: left;
+    z-index: 10;
+}
+
+.dropdown-content a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    padding: 8px 0;
+}
+
+.dropdown-content a:hover {
+    background: #f0f0f0;
+}
+
+    </style>
+</head>
+<body>
+    <!-- Profile Dropdown -->
+<div class="profile-container">
+    <div class="profile-icon" onclick="toggleDropdown()">
+        {{ user.username|first|upper }}
+    </div>
+    <div id="dropdownContent" class="dropdown-content">
+        <p>Username: {{ user.username }}</p>
+        <form id="logoutForm" action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" style="border: none; background: none; color: #333; cursor: pointer;">
+                Logout
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Toggle dropdown menu
+    function toggleDropdown() {
+        var dropdown = document.getElementById("dropdownContent");
+        dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", function(event) {
+        var dropdown = document.getElementById("dropdownContent");
+        var profileIcon = document.querySelector(".profile-icon");
+
+        if (!profileIcon.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.style.display = "none";
+        }
+    });
+</script>
+
+    <h1>Welcome to the Data Science Course</h1>
+    <div class="container">
+        <div class="section">
+            <h3>Data Wrangling and Visualization</h3>
+            <p>Learn how to clean, preprocess, and visualize raw data using tools like Pandas, NumPy, and Matplotlib.</p>
+            <p><strong>Useful Links:</strong></p>
+            <p><a href="https://pandas.pydata.org/" target="_blank">Pandas Documentation</a></p>
+            <p><a href="https://matplotlib.org/" target="_blank">Matplotlib Documentation</a></p>
+            <p><strong>YouTube Video:</strong> <a href="https://www.youtube.com/watch?v=vmEHCJofslg" target="_blank">Data Wrangling with Pandas</a></p>
+        </div>
+
+        <div class="section">
+            <h3>Statistics and Probability</h3>
+            <p>Understand the fundamentals of statistics and probability, which are essential for interpreting data and making informed decisions.</p>
+            <p><strong>Useful Links:</strong></p>
+            <p><a href="https://www.khanacademy.org/math/statistics-probability" target="_blank">Khan Academy - Statistics & Probability</a></p>
+            <p><a href="https://www.statisticshowto.com/" target="_blank">Statistics How To</a></p>
+            <p><strong>YouTube Video:</strong> <a href="https://www.youtube.com/watch?v=Vfo5le26IhY" target="_blank">Statistics for Data Science</a></p>
+        </div>
+
+        <div class="section">
+            <h3>Machine Learning with Python</h3>
+            <p>Learn how to build machine learning models using Python, with libraries like scikit-learn, TensorFlow, and Keras.</p>
+            <p><strong>Useful Links:</strong></p>
+            <p><a href="https://scikit-learn.org/stable/" target="_blank">scikit-learn Documentation</a></p>
+            <p><a href="https://www.tensorflow.org/" target="_blank">TensorFlow Documentation</a></p>
+            <p><strong>YouTube Video:</strong> <a href="https://www.youtube.com/watch?v=7eh4d6sabA0" target="_blank">Machine Learning with Python</a></p>
+        </div>
+
+        <div class="section">
+            <h3>Deep Learning and Neural Networks</h3>
+            <p>Understand deep learning techniques and how neural networks work to solve complex problems like image recognition and natural language processing.</p>
+            <p><strong>Useful Links:</strong></p>
+            <p><a href="https://www.deeplearning.ai/" target="_blank">DeepLearning.AI</a></p>
+            <p><a href="https://pytorch.org/" target="_blank">PyTorch Documentation</a></p>
+            <p><strong>YouTube Video:</strong> <a href="https://www.youtube.com/watch?v=aircAruvnKk" target="_blank">Deep Learning Tutorial</a></p>
+        </div>
+
+        <div class="section">
+            <h3>Big Data Technologies</h3>
+            <p>Learn how to handle and analyze large datasets using big data technologies like Hadoop, Spark, and NoSQL databases.</p>
+            <p><strong>Useful Links:</strong></p>
+            <p><a href="https://hadoop.apache.org/" target="_blank">Hadoop Official Website</a></p>
+            <p><a href="https://spark.apache.org/" target="_blank">Apache Spark Documentation</a></p>
+            <p><strong>YouTube Video:</strong> <a href="https://youtu.be/bY6ZzQmtOzk?si=cWdBW0hNzARI0vTp" target="_blank">Big Data Tutorial</a></p>
+        </div>
+
+        <div class="section">
+            <h3>Real-World Data Science Projects</h3>
+            <p>Work on real-world projects to gain practical experience in solving data problems and developing machine learning models.</p>
+            <p><strong>Useful Links:</strong></p>
+            <p><a href="https://www.kaggle.com/" target="_blank">Kaggle - Data Science Competitions</a></p>
+            <p><a href="https://github.com/awesomedata/awesome-public-datasets" target="_blank">Awesome Public Datasets</a></p>
+            <p><strong>YouTube Video:</strong> <a href="https://youtu.be/h1r9NnQDJfo?si=8K_rI3Yhy5p4ojYE" target="_blank">Data Science Project Ideas</a></p>
+        </div>
+
+        <div class="cta">
+            <p>Well done! You've finished the course. Keep up the great work!</p>
+            <a href="/data-science"><button>Back</button></a>
+        </div>
+    </div>
+</body>
+</html>
